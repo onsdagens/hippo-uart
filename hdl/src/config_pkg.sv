@@ -99,6 +99,7 @@ package config_pkg;
   localparam integer unsigned FifoQueueSize = 256;
   localparam integer unsigned FifoPtrSize = $clog2(FifoQueueSize);
   localparam type FifoPtrT = logic [FifoPtrSize -1:0];
+  localparam integer unsigned FifoDataWidth = 8;
   localparam CsrAddrT FifoWordCsrAddr = 'h50;
   localparam CsrAddrT FifoByteCsrAddr = 'h51;
   localparam integer unsigned CoreFreq = 20000000;

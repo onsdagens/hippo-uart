@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_fifo_spram_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="\$unit_xpm_cdc_sv_220102727 " />
+            <top_module name="config_pkg" />
+            <top_module name="decoder_pkg" />
+            <top_module name="glbl" />
+            <top_module name="tb_fifo_spram" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="560.542 ns"></ZoomEndTime>
+      <Cursor1Time time="76.942 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="270"></NameColumnWidth>
+      <ValueColumnWidth column_width="60"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="22" />
+   <wvobject type="logic" fp_name="/tb_fifo_spram/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_fifo_spram/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_fifo_spram/uart_next">
+      <obj_property name="ElementShortName">uart_next</obj_property>
+      <obj_property name="ObjectShortName">uart_next</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_fifo_spram/csr_enable">
+      <obj_property name="ElementShortName">csr_enable</obj_property>
+      <obj_property name="ObjectShortName">csr_enable</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_fifo_spram/csr_addr">
+      <obj_property name="ElementShortName">csr_addr[11:0]</obj_property>
+      <obj_property name="ObjectShortName">csr_addr[11:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_fifo_spram/rs1_zimm">
+      <obj_property name="ElementShortName">rs1_zimm[4:0]</obj_property>
+      <obj_property name="ObjectShortName">rs1_zimm[4:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_fifo_spram/rs1_data">
+      <obj_property name="ElementShortName">rs1_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">rs1_data[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_fifo_spram/csr_op">
+      <obj_property name="ElementShortName">csr_op[2:0]</obj_property>
+      <obj_property name="ObjectShortName">csr_op[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_fifo_spram/csr_data_out">
+      <obj_property name="ElementShortName">csr_data_out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">csr_data_out[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_fifo_spram/fifo_data">
+      <obj_property name="ElementShortName">fifo_data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">fifo_data[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_fifo_spram/fifo_have_next">
+      <obj_property name="ElementShortName">fifo_have_next</obj_property>
+      <obj_property name="ObjectShortName">fifo_have_next</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_fifo_spram/dut/block_0/write_enable">
+      <obj_property name="ElementShortName">write_enable</obj_property>
+      <obj_property name="ObjectShortName">write_enable</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_fifo_spram/dut/buffer_in_ptr">
+      <obj_property name="ElementShortName">buffer_in_ptr[1:0]</obj_property>
+      <obj_property name="ObjectShortName">buffer_in_ptr[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_fifo_spram/dut/buffer">
+      <obj_property name="ElementShortName">buffer[0:1][7:0]</obj_property>
+      <obj_property name="ObjectShortName">buffer[0:1][7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_fifo_spram/dut/mem_in_ptr">
+      <obj_property name="ElementShortName">mem_in_ptr[7:0]</obj_property>
+      <obj_property name="ObjectShortName">mem_in_ptr[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_fifo_spram/dut/mem_out_ptr">
+      <obj_property name="ElementShortName">mem_out_ptr[7:0]</obj_property>
+      <obj_property name="ObjectShortName">mem_out_ptr[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_fifo_spram/dut/spram_we">
+      <obj_property name="ElementShortName">spram_we</obj_property>
+      <obj_property name="ObjectShortName">spram_we</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_fifo_spram/dut/spram_din">
+      <obj_property name="ElementShortName">spram_din[7:0]</obj_property>
+      <obj_property name="ObjectShortName">spram_din[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_fifo_spram/dut/spram_dout">
+      <obj_property name="ElementShortName">spram_dout[7:0]</obj_property>
+      <obj_property name="ObjectShortName">spram_dout[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_fifo_spram/dut/block_0/xpm_memory_sdpram_inst/xpm_memory_base_inst/mem">
+      <obj_property name="ElementShortName">mem[0:255][7:0]</obj_property>
+      <obj_property name="ObjectShortName">mem[0:255][7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_fifo_spram/dut/read_on_next">
+      <obj_property name="ElementShortName">read_on_next</obj_property>
+      <obj_property name="ObjectShortName">read_on_next</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_fifo_spram/dut/have_next">
+      <obj_property name="ElementShortName">have_next</obj_property>
+      <obj_property name="ObjectShortName">have_next</obj_property>
+   </wvobject>
+</wave_config>
