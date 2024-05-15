@@ -64,7 +64,8 @@ module fpga_sdpram_uart
   );
   logic send;
   logic [31:0] sample[4] = {'hDE, 'hAD, 'hBE, 'hEF};
-  logic [3:0] ptr;
+  // try different lengths of comms to catch different edge cases.
+  logic [1:0] max_idx;
   always_ff @(posedge clk) begin
     if (r_count[25] == 1) begin
       //fifo_data_in <= 'h42;
@@ -75,8 +76,9 @@ module fpga_sdpram_uart
       if (send == 1) begin
         fifo_data_in <= sample[r_count[1:0]];
         fifo_write_enable_in <= 1;
-        if (r_count[1:0] == 3) begin
+        if (r_count[1:0] == max_idx) begin
           send <= 0;
+          max_idx <= max_idx + 1;
         end
       end else begin
         fifo_write_enable_in <= 0;

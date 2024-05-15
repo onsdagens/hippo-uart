@@ -14,15 +14,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="99,317.215 ns"></ZoomStartTime>
-      <ZoomEndTime time="100,280.558 ns"></ZoomEndTime>
-      <Cursor1Time time="100,120.000 ns"></Cursor1Time>
+      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
+      <ZoomEndTime time="660.500001 us"></ZoomEndTime>
+      <Cursor1Time time="140.000000 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="246"></NameColumnWidth>
+      <NameColumnWidth column_width="242"></NameColumnWidth>
       <ValueColumnWidth column_width="60"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="14" />
+   <WVObjectSize size="16" />
    <wvobject type="array" fp_name="/tb_uart_spram/fifo_data_in">
       <obj_property name="ElementShortName">fifo_data_in[7:0]</obj_property>
       <obj_property name="ObjectShortName">fifo_data_in[7:0]</obj_property>
@@ -50,6 +50,10 @@
    <wvobject type="logic" fp_name="/tb_uart_spram/fifo_i/memory_written">
       <obj_property name="ElementShortName">memory_written</obj_property>
       <obj_property name="ObjectShortName">memory_written</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_uart_spram/fifo_i/read_from_memory">
+      <obj_property name="ElementShortName">read_from_memory[2:0]</obj_property>
+      <obj_property name="ObjectShortName">read_from_memory[2:0]</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/tb_uart_spram/fifo_i/buffer_in_ptr">
       <obj_property name="ElementShortName">buffer_in_ptr[1:0]</obj_property>
@@ -79,5 +83,10 @@
    <wvobject type="array" fp_name="/tb_uart_spram/fifo_i/block_0/xpm_memory_sdpram_inst/xpm_memory_base_inst/mem">
       <obj_property name="ElementShortName">mem[0:255][7:0]</obj_property>
       <obj_property name="ObjectShortName">mem[0:255][7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_uart_spram/fifo_i/some_signal">
+      <obj_property name="ElementShortName">some_signal[2:0]</obj_property>
+      <obj_property name="ObjectShortName">some_signal[2:0]</obj_property>
    </wvobject>
 </wave_config>
