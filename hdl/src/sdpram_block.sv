@@ -329,7 +329,7 @@ module sdpram_block
   logic injectdbiterra;
   logic injectsbiterra;
   logic regceb;
-  logic sleep;
+ // logic sleep;
   logic wea;
   xpm_memory_sdpram #(
       .ADDR_WIDTH_A(FifoPtrSize),  // DECIMAL
@@ -401,7 +401,7 @@ module sdpram_block
                      // Synchronously resets output port doutb to the value specified by
                      // parameter READ_RESET_VALUE_B.
 
-      .sleep(sleep),  // 1-bit input: sleep signal to enable the dynamic power saving feature.
+      .sleep(0),  // 1-bit input: sleep signal to enable the dynamic power saving feature.
       .wea  (write_enable)     // WRITE_DATA_WIDTH_A/BYTE_WRITE_WIDTH_A-bit input: Write enable vector
       // for port A input data port dina. 1 bit wide when word-wide writes are
       // used. In byte-wide write configurations, each bit controls the

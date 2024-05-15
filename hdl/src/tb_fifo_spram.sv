@@ -46,36 +46,87 @@ module tb_fifo_spram;
     #20;
     reset = 0;
     csr_enable = 1;
-    rs1_data = 'h13;
-    #20;
-    rs1_data = 'h37;
-    #20;
     rs1_data = 'hDE;
     #20;
     rs1_data = 'hAD;
     #20;
+    rs1_data = 'hBE;
+    #20;
+    rs1_data = 'hEF;
+    #20;
+    rs1_data = 'h12;
+    #20;
+    rs1_data = 'h34;
+    #20;
+    rs1_data = 'h56;
+    #20;
+    rs1_data = 'h78;
+    #20;
     csr_enable = 0;
     #20;
-    uart_next = 0;
-    #20;
     uart_next = 1;
     #20;
     uart_next = 0;
     #20;
     uart_next = 0;
     #20;
+
     uart_next = 1;
     #20;
     uart_next = 0;
     #20;
     uart_next = 0;
     #20;
+
     uart_next = 1;
     #20;
     uart_next = 0;
     #20;
     uart_next = 0;
     #20;
+
+    uart_next = 1;
+    #20;
+    uart_next = 0;
+    #20;
+    uart_next = 0;
+    #20;
+
+    uart_next = 1;
+    #20;
+    uart_next = 0;
+    #20;
+    uart_next = 0;
+    #20;
+
+    uart_next = 1;
+    #20;
+    uart_next = 0;
+    #20;
+    uart_next = 0;
+    #20;
+
+    uart_next = 1;
+    #20;
+    uart_next = 0;
+    #20;
+    uart_next = 0;
+    #20;
+
+    uart_next = 1;
+    #20;
+    uart_next = 0;
+    #20;
+    uart_next = 0;
+    #20;
+
+    uart_next = 1;
+    #20;
+    uart_next = 0;
+    #20;
+    uart_next = 0;
+    #20;
+
 
 
     $finish;
