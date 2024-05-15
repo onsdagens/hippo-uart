@@ -81,9 +81,14 @@ module fifo_spram (
         mem_out_ptr <= mem_out_ptr + 1;
         buffer[1] <= spram_dout;
         read_from_memory <= 0;
+        // the mem_out_ptr change does not take effect until next cycle, do an
+        // ugly...
+        if (mem_in_ptr != (mem_out_ptr + 1)) begin
+          buffer_in_ptr <= buffer_in_ptr + 1;
+        end
       end
       if (csr_enable == 1 && csr_addr == FifoByteCsrAddr) begin
-        if (buffer_in_ptr < 2) begin
+        if ((buffer_in_ptr < 2) && (read_from_memory == 0)) begin
           buffer[buffer_in_ptr] <= rs1_data;
           buffer_in_ptr <= buffer_in_ptr + 1;
         end else begin
@@ -100,12 +105,7 @@ module fifo_spram (
       if (next) begin
         buffer[0] <= buffer[1];
         if ((mem_in_ptr != mem_out_ptr) || (csr_enable == 1 && csr_addr == FifoByteCsrAddr && buffer_in_ptr >= 2)) begin
-          // if spram_we ????
-          // here read from memory
-          //buffer[1]   <= rs1_data;
-          //mem_out_ptr <= mem_out_ptr + 1;
-          //some_signal <= 2;
-          //
+          buffer_in_ptr <= buffer_in_ptr - 1;
           read_from_memory <= 3;
         end else begin
           buffer_in_ptr <= buffer_in_ptr - 1;
