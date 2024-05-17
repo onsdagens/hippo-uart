@@ -1,25 +1,25 @@
-// fifo_spram
+// fifo_interleaved
 `timescale 1ns / 1ps
 
 import decoder_pkg::*;
 import config_pkg::*;
-module fifo_spram (
+module fifo_interleaved (
     input logic clk_i,
     input logic reset_i,
 
-    // interface to outside write buffer
+    // write interface
     input logic write_enable,
-    input logic [31:0] write_data,
-    input logic [3:0] write_width,
+    input logic [FifoEntryWidthBits-1:0] write_data,
+    input logic [FifoEntryWidthSize:0] write_width,
 
-    // interface to user component
+    // read interface
     input logic ack,
     output logic [7:0] data,
     output logic have_next
 
 );
   logic spram_we;
-  logic [7:0] spram_din;
+  logic [FifoEntryWidthBits-1:0] spram_din;
   logic [7:0] buffer[2];
   FifoPtrT mem_in_ptr;
   FifoPtrT mem_out_ptr;
@@ -30,15 +30,14 @@ module fifo_spram (
   logic memory_written;
   logic [2:0] read_from_memory;
   logic [3:0] stored_width;
-
-  sdpram_block #(
-      .FifoSizeBits(FifoQueueSize * 8)
-  ) block_0 (
+  logic [FifoEntryWidthSize:0] write_width_memory;
+  interleaved_memory queue_memory (
       .clk(clk_i),
       .reset(reset_i),
-      .address_read(mem_out_ptr),
-      .address_write(mem_in_ptr),
+      .read_addr(mem_out_ptr),
+      .write_addr(mem_in_ptr),
       .write_enable(spram_we),
+      .write_width(write_width_memory),
       .data_in(spram_din),
       .data_out(spram_dout)
   );
@@ -46,6 +45,8 @@ module fifo_spram (
     data = buffer[0];
     spram_read_addr = mem_out_ptr;
     spram_write_addr = mem_in_ptr;
+    //write_width_memory = write_width - (2 - buffer_in_ptr);
+
   end
 
   always_ff @(posedge clk_i) begin
@@ -57,13 +58,14 @@ module fifo_spram (
       buffer <= '{default: 0};
       memory_written <= 0;
       read_from_memory <= 0;
-      stored_width <= 0;
+      write_width_memory <= 0;
+      spram_din <= 0;
     end else begin
       spram_we <= 0;
       // delay incrementing the in pointer until the write is finished
       if (memory_written) begin
         memory_written <= 0;
-        mem_in_ptr <= mem_in_ptr + stored_width;
+        mem_in_ptr <= mem_in_ptr + write_width_memory;
       end
       // delay pop from memory until we are sure that any readwrites are finished
       if (read_from_memory > 1) begin
@@ -75,13 +77,28 @@ module fifo_spram (
       end
       if (write_enable) begin
         if ((buffer_in_ptr < 2) && (read_from_memory == 0)) begin
-          buffer[buffer_in_ptr] <= write_data;
-          buffer_in_ptr <= buffer_in_ptr + 1;
+          for (integer i = 0; i < 2; i++) begin
+            if ((i - buffer_in_ptr < write_width) && (i - buffer_in_ptr >= 0)) begin
+              buffer[i] <= write_data >> (((write_width - 1) - (i - buffer_in_ptr)) * 8);
+              buffer_in_ptr <= i + 1;
+            end
+          end
+          //buffer[buffer_in_ptr] <= write_data;
+          //buffer_in_ptr <= buffer_in_ptr + 1;
+          if (buffer_in_ptr + write_width > 2) begin
+            spram_we <= 1;
+            memory_written <= 1;
+            write_width_memory <= write_width - (2 - buffer_in_ptr);
+            spram_din <= write_data;
+            // stored_width <= write_width - (2 - buffer_in_ptr);
+          end
         end else begin
           spram_we <= 1;
-          spram_din <= write_data;
+          //spram_din <= write_data;
           memory_written <= 1;
-          stored_width <= write_width;
+          write_width_memory <= write_width - (2 - buffer_in_ptr);
+          spram_din <= write_data;
+          // stored_width <= write_width - (2 - buffer_in_ptr);
         end
       end
       if (buffer_in_ptr > 0) begin

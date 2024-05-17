@@ -3,90 +3,57 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="tb_uart_spram_behav.wdb" id="1">
+      <db_ref path="tb_fifo_interleaved_behav.wdb" id="1">
          <top_modules>
             <top_module name="\$unit_xpm_cdc_sv_220102727 " />
             <top_module name="config_pkg" />
             <top_module name="decoder_pkg" />
             <top_module name="glbl" />
-            <top_module name="tb_uart_spram" />
+            <top_module name="mem_pkg" />
+            <top_module name="tb_fifo_interleaved" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
-      <ZoomEndTime time="660.500001 us"></ZoomEndTime>
-      <Cursor1Time time="140.000000 us"></Cursor1Time>
+      <ZoomStartTime time="261.186 ns"></ZoomStartTime>
+      <ZoomEndTime time="908.187 ns"></ZoomEndTime>
+      <Cursor1Time time="820.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="242"></NameColumnWidth>
+      <NameColumnWidth column_width="226"></NameColumnWidth>
       <ValueColumnWidth column_width="60"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="16" />
-   <wvobject type="array" fp_name="/tb_uart_spram/fifo_data_in">
-      <obj_property name="ElementShortName">fifo_data_in[7:0]</obj_property>
-      <obj_property name="ObjectShortName">fifo_data_in[7:0]</obj_property>
+   <WVObjectSize size="8" />
+   <wvobject type="logic" fp_name="/tb_fifo_interleaved/dut/have_next">
+      <obj_property name="ElementShortName">have_next</obj_property>
+      <obj_property name="ObjectShortName">have_next</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/tb_uart_spram/fifo_data">
-      <obj_property name="ElementShortName">fifo_data[7:0]</obj_property>
-      <obj_property name="ObjectShortName">fifo_data[7:0]</obj_property>
+   <wvobject type="logic" fp_name="/tb_fifo_interleaved/dut/ack">
+      <obj_property name="ElementShortName">ack</obj_property>
+      <obj_property name="ObjectShortName">ack</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/tb_uart_spram/uart_next">
-      <obj_property name="ElementShortName">uart_next</obj_property>
-      <obj_property name="ObjectShortName">uart_next</obj_property>
+   <wvobject type="array" fp_name="/tb_fifo_interleaved/dut/data">
+      <obj_property name="ElementShortName">data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data[7:0]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/tb_uart_spram/fifo_have_next">
-      <obj_property name="ElementShortName">fifo_have_next</obj_property>
-      <obj_property name="ObjectShortName">fifo_have_next</obj_property>
+   <wvobject type="logic" fp_name="/tb_fifo_interleaved/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/tb_uart_spram/fifo_i/clk_i">
-      <obj_property name="ElementShortName">clk_i</obj_property>
-      <obj_property name="ObjectShortName">clk_i</obj_property>
+   <wvobject type="array" fp_name="/tb_fifo_interleaved/dut/queue_memory/block_n_din">
+      <obj_property name="ElementShortName">block_n_din[0:3][7:0]</obj_property>
+      <obj_property name="ObjectShortName">block_n_din[0:3][7:0]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/tb_uart_spram/reset">
-      <obj_property name="ElementShortName">reset</obj_property>
-      <obj_property name="ObjectShortName">reset</obj_property>
+   <wvobject type="array" fp_name="/tb_fifo_interleaved/dut/queue_memory/block_n_we">
+      <obj_property name="ElementShortName">block_n_we[0:3]</obj_property>
+      <obj_property name="ObjectShortName">block_n_we[0:3]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/tb_uart_spram/fifo_i/memory_written">
-      <obj_property name="ElementShortName">memory_written</obj_property>
-      <obj_property name="ObjectShortName">memory_written</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_uart_spram/fifo_i/read_from_memory">
-      <obj_property name="ElementShortName">read_from_memory[2:0]</obj_property>
-      <obj_property name="ObjectShortName">read_from_memory[2:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_uart_spram/fifo_i/buffer_in_ptr">
-      <obj_property name="ElementShortName">buffer_in_ptr[1:0]</obj_property>
-      <obj_property name="ObjectShortName">buffer_in_ptr[1:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_uart_spram/fifo_i/buffer">
-      <obj_property name="ElementShortName">buffer[0:1][7:0]</obj_property>
-      <obj_property name="ObjectShortName">buffer[0:1][7:0]</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_uart_spram/fifo_i/spram_dout">
-      <obj_property name="ElementShortName">spram_dout[7:0]</obj_property>
-      <obj_property name="ObjectShortName">spram_dout[7:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_uart_spram/fifo_i/mem_in_ptr">
+   <wvobject type="array" fp_name="/tb_fifo_interleaved/dut/mem_in_ptr">
       <obj_property name="ElementShortName">mem_in_ptr[7:0]</obj_property>
       <obj_property name="ObjectShortName">mem_in_ptr[7:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/tb_uart_spram/fifo_i/mem_out_ptr">
-      <obj_property name="ElementShortName">mem_out_ptr[7:0]</obj_property>
-      <obj_property name="ObjectShortName">mem_out_ptr[7:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_uart_spram/fifo_i/spram_din">
-      <obj_property name="ElementShortName">spram_din[7:0]</obj_property>
-      <obj_property name="ObjectShortName">spram_din[7:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_uart_spram/fifo_i/block_0/xpm_memory_sdpram_inst/xpm_memory_base_inst/mem">
-      <obj_property name="ElementShortName">mem[0:255][7:0]</obj_property>
-      <obj_property name="ObjectShortName">mem[0:255][7:0]</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/tb_uart_spram/fifo_i/some_signal">
-      <obj_property name="ElementShortName">some_signal[2:0]</obj_property>
-      <obj_property name="ObjectShortName">some_signal[2:0]</obj_property>
+   <wvobject type="array" fp_name="/tb_fifo_interleaved/dut/queue_memory/data_in">
+      <obj_property name="ElementShortName">data_in[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in[31:0]</obj_property>
    </wvobject>
 </wave_config>

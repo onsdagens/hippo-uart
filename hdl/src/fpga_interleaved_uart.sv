@@ -3,7 +3,7 @@
 `timescale 1ns / 1ps
 
 
-module fpga_sdpram_uart
+module fpga_interleaved_uart
   import decoder_pkg::*;
 (
     input sysclk,
@@ -31,7 +31,8 @@ module fpga_sdpram_uart
   logic fifo_write_enable_in;
   word prescaler;
   word r_count;
-  logic [7:0] fifo_data_in;
+  logic [31:0] fifo_data_in;
+  logic [2:0] fifo_write_width;
   assign prescaler = 0;
   uart uart_i (
       .clk_i    (clk),
@@ -44,18 +45,20 @@ module fpga_sdpram_uart
       .next     (uart_next)        // next word request to the fifo
   );
 
-  fifo_spram fifo_i (
-      .clk_i(clk),
+  fifo_interleaved fifo_i (
+      .clk_i  (clk),
       .reset_i(tmp_sw1),
-      .ack(uart_next),
-      .write_enable(fifo_write_enable_in),
-      .write_data(fifo_data_in),
 
+      .write_enable(fifo_write_enable_in),
+      .write_data  (fifo_data_in),
+      .write_width (fifo_write_width),
+
+      .ack(uart_next),
       .data(fifo_data),
       .have_next(fifo_have_next)
   );
   logic send;
-  logic [31:0] sample[4] = {'hDE, 'hAD, 'hBE, 'hEF};
+  //logic [31:0] sample[4] = {'h000000DE, 'h0000DEAD, 'h00DEADBE, 'hDEADBEEF};
   // try different lengths of comms to catch different edge cases.
   logic [1:0] max_idx;
   always_ff @(posedge clk) begin
@@ -66,12 +69,17 @@ module fpga_sdpram_uart
       r_count <= 0;
     end else begin
       if (send == 1) begin
-        fifo_data_in <= sample[r_count[1:0]];
+//        fifo_data_in <= sample[r_count[1:0]];
+//        fifo_write_enable_in <= 1;
+//        fifo_write_width <= r_count[1:0] + 1;
+//        if (r_count[1:0] == max_idx) begin
+//          send <= 0;
+//          max_idx <= max_idx + 1;
+//        end
+        fifo_data_in <= 'hDEADBEEF;
+        fifo_write_width <= 4;
         fifo_write_enable_in <= 1;
-        if (r_count[1:0] == max_idx) begin
-          send <= 0;
-          max_idx <= max_idx + 1;
-        end
+        send <= 0;
       end else begin
         fifo_write_enable_in <= 0;
       end

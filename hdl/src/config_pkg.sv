@@ -97,7 +97,13 @@ package config_pkg;
 
   // UART config
   localparam integer unsigned FifoQueueSize = 256;
+  localparam integer unsigned FifoEntryWidth = 4;
+  localparam integer unsigned FifoEntryWidthBits = FifoEntryWidth * 8;
+  localparam integer unsigned FifoBlockSize = FifoQueueSize / FifoEntryWidth;
+  localparam integer unsigned FifoAddrWidth = $clog2(FifoQueueSize);
+  localparam integer unsigned FifoBlockAddrWidth = $clog2(FifoQueueSize / FifoEntryWidth);
   localparam integer unsigned FifoPtrSize = $clog2(FifoQueueSize);
+  localparam integer unsigned FifoEntryWidthSize = $clog2(FifoEntryWidth - 1);
   localparam type FifoPtrT = logic [FifoPtrSize -1:0];
   localparam integer unsigned FifoDataWidth = 8;
   localparam CsrAddrT FifoWordCsrAddr = 'h50;

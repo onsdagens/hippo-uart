@@ -314,12 +314,13 @@
 module sdpram_block
   import config_pkg::*;
 #(
-    parameter integer FifoSizeBits = FifoQueueSize * 8
+    parameter integer FifoSizeBits = FifoQueueSize * 8,
+    parameter integer AddrSize = FifoPtrSize
 ) (
     input logic clk,
     input logic reset,
-    input FifoPtrT address_write,
-    input FifoPtrT address_read,
+    input [AddrSize-1:0] address_write,
+    input [AddrSize-1:0] address_read,
     input logic write_enable,
     input logic [7:0] data_in,
     output logic [7:0] data_out
@@ -329,11 +330,11 @@ module sdpram_block
   logic injectdbiterra;
   logic injectsbiterra;
   logic regceb;
- // logic sleep;
+  // logic sleep;
   logic wea;
   xpm_memory_sdpram #(
-      .ADDR_WIDTH_A(FifoPtrSize),  // DECIMAL
-      .ADDR_WIDTH_B(FifoPtrSize),  // DECIMAL
+      .ADDR_WIDTH_A(AddrSize),  // DECIMAL
+      .ADDR_WIDTH_B(AddrSize),  // DECIMAL
       .AUTO_SLEEP_TIME(0),  // DECIMAL
       .BYTE_WRITE_WIDTH_A(FifoDataWidth),  // DECIMAL
       .CASCADE_HEIGHT(0),  // DECIMAL
@@ -346,7 +347,7 @@ module sdpram_block
       .MEMORY_INIT_PARAM("0"),  // String
       .MEMORY_OPTIMIZATION("false"),  // String
       .MEMORY_PRIMITIVE("block"),  // String
-      .MEMORY_SIZE(2048),  // DECIMAL
+      .MEMORY_SIZE(FifoSizeBits),  // DECIMAL
       .MESSAGE_CONTROL(0),  // DECIMAL
       .RAM_DECOMP("auto"),  // String
       .READ_DATA_WIDTH_B(FifoDataWidth),  // DECIMAL
