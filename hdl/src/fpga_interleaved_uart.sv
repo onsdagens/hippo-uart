@@ -58,7 +58,7 @@ module fpga_interleaved_uart
       .have_next(fifo_have_next)
   );
   logic send;
-  //logic [31:0] sample[4] = {'h000000DE, 'h0000DEAD, 'h00DEADBE, 'hDEADBEEF};
+  logic [31:0] sample[4] = {'h000000DE, 'h0000DEAD, 'h00DEADBE, 'hDEADBEEF};
   // try different lengths of comms to catch different edge cases.
   logic [1:0] max_idx;
   always_ff @(posedge clk) begin
@@ -69,6 +69,15 @@ module fpga_interleaved_uart
       r_count <= 0;
     end else begin
       if (send == 1) begin
+          if (r_count[2:0] == 4) begin
+            send <= 0;
+            fifo_write_enable_in <= 0;
+          end 
+          else begin
+            fifo_data_in <= sample[r_count[1:0]];
+            fifo_write_enable_in <= 1;
+            fifo_write_width <= r_count[1:0] + 1;
+          end
 //        fifo_data_in <= sample[r_count[1:0]];
 //        fifo_write_enable_in <= 1;
 //        fifo_write_width <= r_count[1:0] + 1;
@@ -76,10 +85,10 @@ module fpga_interleaved_uart
 //          send <= 0;
 //          max_idx <= max_idx + 1;
 //        end
-        fifo_data_in <= 'hDEADBEEF;
-        fifo_write_width <= 4;
-        fifo_write_enable_in <= 1;
-        send <= 0;
+//        fifo_data_in <= 'hDEADBEEF;
+//        fifo_write_width <= 4;
+//        fifo_write_enable_in <= 1;
+//        send <= 0;
       end else begin
         fifo_write_enable_in <= 0;
       end

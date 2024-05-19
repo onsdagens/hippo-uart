@@ -67,7 +67,9 @@ module interleaved_memory
       end
     end
     for (integer i = 0; i < FifoEntryWidth; i++) begin
-      block_n_din[i] = data_in >> (((((write_addr) + write_width) % 4) - 1 - i) * 8);
+      logic [FifoEntryWidthSize-1:0] ptr = write_addr % 4 + i;
+      block_n_din[ptr] = data_in >> ((write_width - 1 - i) * 8);
+      //block_n_din[i] = data_in >> (((((write_addr) + write_width) % 4) - 1 - i) * 8);
     end
     //for (integer i = write_width - 1; i >= 0; i--) begin
     //  logic [FifoEntryWidthSize-1:0] ptr = write_addr % 4 + i;
