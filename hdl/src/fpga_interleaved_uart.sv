@@ -63,8 +63,6 @@ module fpga_interleaved_uart
   logic [1:0] max_idx;
   always_ff @(posedge clk) begin
     if (r_count[25] == 1) begin
-      //fifo_data_in <= 'h42;
-      //fifo_write_enable_in <= 1;
       send <= 1;
       r_count <= 0;
     end else begin
@@ -78,17 +76,6 @@ module fpga_interleaved_uart
             fifo_write_enable_in <= 1;
             fifo_write_width <= r_count[1:0] + 1;
           end
-//        fifo_data_in <= sample[r_count[1:0]];
-//        fifo_write_enable_in <= 1;
-//        fifo_write_width <= r_count[1:0] + 1;
-//        if (r_count[1:0] == max_idx) begin
-//          send <= 0;
-//          max_idx <= max_idx + 1;
-//        end
-//        fifo_data_in <= 'hDEADBEEF;
-//        fifo_write_width <= 4;
-//        fifo_write_enable_in <= 1;
-//        send <= 0;
       end else begin
         fifo_write_enable_in <= 0;
       end

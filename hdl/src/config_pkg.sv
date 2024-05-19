@@ -87,6 +87,7 @@ package config_pkg;
 
   // Monotonic timer
   localparam integer unsigned MonoTimerWidth = 32;
+  localparam integer unsigned MonoTimerWidthBytes = MonoTimerWidth / 8;
   localparam type MonoTimerT = logic [MonoTimerWidth-1:0];
   localparam integer unsigned TimerTWidth = $bits(TimerT);
 
