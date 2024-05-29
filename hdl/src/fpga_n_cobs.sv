@@ -31,6 +31,7 @@ module fpga_n_cobs
   logic send;
   word sample[4] = {'h00000013, 'h00000000, 'h00000037, 'h000000DE};
   logic [1:0] max_idx;
+  logic [7:0] id;
   clk_wiz_0 clk_gen (
       // Clock in ports
       .clk_in1(sysclk),
@@ -48,6 +49,7 @@ module fpga_n_cobs
       .csr_addr('h51),
       .timer('h12000078),
 
+      .id(id),
       .rs1_data(rs1_data),
 
       .level(level_sig),
@@ -87,10 +89,11 @@ module fpga_n_cobs
         r_count <= 0;
         led_r <= 0;
         rs1_data <= 0;
-        level_sig <= 2;
+        level_sig <= 0;
         //rs1_data   <= sample[r_count[0]];
         //csr_enable <= 1;
         csr_enable <= 0;
+        id <= 0;
     end 
     else if (r_count[25] == 1) begin
       level_sig <= 1;
@@ -103,16 +106,19 @@ module fpga_n_cobs
           send <= 0;
           csr_enable <= 0;
           level_sig <= 1;
+          id <= 0;
         end else begin
           //simulate preemption
           if (r_count[2:0] == 7) begin
-            level_sig <= 0;
+            id <= 1;
+            level_sig <= 2;
           end
           rs1_data   <= sample[r_count[1:0]];
           csr_enable <= 1;
         end
       end else begin
-        level_sig <= 2;
+        id <= 0;
+        level_sig <= 0;
         csr_enable <= 0;
       end
       r_count <= r_count + 1;

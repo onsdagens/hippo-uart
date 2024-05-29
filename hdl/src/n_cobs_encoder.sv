@@ -12,6 +12,7 @@ module n_cobs_encoder
     // fill rest with timer
     input MonoTimerT timer,
 
+    input logic [7:0] id,
     input logic csr_enable,
     input CsrAddrT csr_addr,
 
@@ -62,15 +63,17 @@ module n_cobs_encoder
       tmp_data = 0;
       tmp_length = length[level];
       write_index = 0;
-      if (level < old_level) begin
+      if (level > old_level) begin
         // push frame
         tmp_length = 0;
+        enqueue(8'((id << 4) | level), tmp_length, tmp_data,
+          write_index);
         for (integer i = 0; i < MonoTimerWidthBytes; i++) begin
           enqueue(8'(timer >> ((MonoTimerWidthBytes - 1 - i) * 8)), tmp_length, tmp_data,
                   write_index);
         end
-        write_index = 4;
-      end else if (level > old_level) begin
+        write_index = 5;
+      end else if (level < old_level) begin
         // pop frame
         n_cobs_eof(length[old_level], tmp_data, write_index);
       end
