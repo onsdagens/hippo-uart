@@ -10,7 +10,7 @@ module tb_n_cobs;
       .reset_i(reset),
       .csr_enable(csr_enable),
       .csr_addr('h51),
-      .timer('h450089),
+      .timer('h12000078),
 
       .rs1_data(rs1_data),
 
@@ -38,7 +38,7 @@ module tb_n_cobs;
   logic csr_enable;
   logic [FifoEntryWidthBits-1:0] rs1_data;
   logic [FifoEntryWidthSize:0] enc_write_width;
-  word enc_write_data;
+  logic [FifoEntryWidthBits-1:0] enc_write_data;
   logic enc_write_enable;
   always #10 clk = ~clk;
   initial begin
@@ -52,10 +52,17 @@ module tb_n_cobs;
     reset = 0;
     #20;
     level = 1;
-
     #20;
     csr_enable = 1;
     rs1_data   = 'h13;
+    #20;
+    rs1_data = 'h00;
+    #20;
+    rs1_data = 'h37;
+    #20;
+    rs1_data = 'hDE;
+    #20;
+    rs1_data = 'h13;
     #20;
     rs1_data = 'h00;
     #20;
@@ -69,7 +76,73 @@ module tb_n_cobs;
     #20;
     level = 2;
     #80;
-    //level = 1;
+    ack = 1;
+    #20;
+    ack = 0;
+    #80;
+    ack = 1;
+    #20;
+    ack = 0;
+    #80;
+    ack = 1;
+    #20;
+    ack = 0;
+    #80;
+    ack = 1;
+    #20;
+    ack = 0;
+    #80;
+    ack = 1;
+    #20;
+    ack = 0;
+    #80;
+    ack = 1;
+    #20;
+    ack = 0;
+    #80;
+    ack = 1;
+    #20;
+    ack = 0;
+    #80;
+    ack = 1;
+    #20;
+    ack = 0;
+    #80;
+    ack = 1;
+    #20;
+    ack = 0;
+    #80;
+    ack = 1;
+    #20;
+    ack = 0;
+    #80;
+    ack = 1;
+    #20;
+    ack = 0;
+    #80;
+    ack = 1;
+    #20;
+    ack = 0;
+    #80;
+    ack = 1;
+    #20;
+    ack = 0;
+    #80;
+    ack = 1;
+    #20;
+    ack = 0;
+    #80;
+    ack = 1;
+    #20;
+    ack = 0;
+    #80;
+    ack = 1;
+    #20;
+    ack = 0;
+    #80;
+    ack = 1;
+    #20;
+    ack = 0;
     #80;
 
 

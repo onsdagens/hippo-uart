@@ -97,8 +97,11 @@ package config_pkg;
   localparam type TimeStampT = logic [TimeStampWidth-1:0];
 
   // UART config
+
   localparam integer unsigned FifoQueueSize = 256;
-  localparam integer unsigned FifoEntryWidth = 4;
+  localparam integer unsigned FifoEntryWidth = 8;
+  localparam type FifoDataT = logic [FifoEntryWidth-1:0][7:0];
+  localparam type FifoDataIdxT = logic [$clog2(FifoEntryWidth):0];
   localparam integer unsigned FifoEntryWidthBits = FifoEntryWidth * 8;
   localparam integer unsigned FifoBlockSize = FifoQueueSize / FifoEntryWidth;
   localparam integer unsigned FifoAddrWidth = $clog2(FifoQueueSize);
@@ -110,6 +113,7 @@ package config_pkg;
   localparam CsrAddrT FifoWordCsrAddr = 'h50;
   localparam CsrAddrT FifoByteCsrAddr = 'h51;
   localparam integer unsigned CoreFreq = 20000000;
+ // localparam integer unsigned CoreFreq = 230400;
   localparam integer unsigned UartBaudRate = 115200;
   localparam integer unsigned UartCmpVal = CoreFreq / UartBaudRate;
 

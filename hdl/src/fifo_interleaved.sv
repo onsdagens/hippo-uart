@@ -29,7 +29,7 @@ module fifo_interleaved (
   logic spram_write_addr;
   logic memory_written;
   logic [2:0] read_from_memory;
-  logic [3:0] stored_width;
+  logic [FifoEntryWidthSize:0] stored_width;
   logic [FifoEntryWidthSize:0] write_width_memory;
   interleaved_memory queue_memory (
       .clk(clk_i),
@@ -60,6 +60,9 @@ module fifo_interleaved (
       read_from_memory <= 0;
       write_width_memory <= 0;
       spram_din <= 0;
+      have_next <= 0;
+      //write_data <= 0;
+      //spram_din <= 0;
     end else begin
       spram_we <= 0;
       // delay incrementing the in pointer until the write is finished

@@ -29,33 +29,31 @@ module interleaved_memory
       ) block (
           .clk(clk),
           .reset(reset),
-          .address_read(read_addr >> 2),
+          .address_read(read_addr >> 3),
           .address_write(block_n_write_addr[k]),
           .write_enable(block_n_we[k]),
           .data_in(block_n_din[k]),
           .data_out(block_n_dout[k])
       );
-
-
-
     end
   endgenerate
   always_comb begin
+    block_n_we  = '{default: 0};
+    block_n_din = '{default: 0};
     for (integer i = 0; i < FifoEntryWidth; i++) begin
       if ((write_addr % FifoEntryWidth) > i) begin
-        block_n_write_addr[i] = (write_addr >> 2) + 1;
+        block_n_write_addr[i] = (write_addr >> 3) + 1;
       end else begin
-        block_n_write_addr[i] = (write_addr >> 2);
+        block_n_write_addr[i] = (write_addr >> 3);
       end
     end
-    //    for (integer i = (write_addr % FifoEntryWidth); i < FifoEntryWidth; i++) begin
-    //      block_n_write_addr[i] = write_addr >> 2;
-    //    end
-    //    for (integer i = 0; i < (write_addr % FifoEntryWidth); i++) begin
-    //      block_n_write_addr[i] = (write_addr >> 2) + 1;
-    //    end
     for (integer i = 0; i < FifoEntryWidth; i++) begin
-      logic [FifoEntryWidthSize-1:0] ptr = (FifoEntryWidthSize)'((write_addr + i) % FifoEntryWidth);
+      automatic
+      logic [FifoEntryWidthSize:0]
+      ptr =
+        ((write_addr+i)%FifoEntryWidth) < FifoEntryWidth ?
+        ((write_addr+i)%FifoEntryWidth) :
+        ((write_addr+i)%FifoEntryWidth) - FifoEntryWidth;
       if (i < (write_width)) begin
         if (write_enable) begin
           block_n_we[ptr] = 1;
@@ -67,14 +65,10 @@ module interleaved_memory
       end
     end
     for (integer i = 0; i < FifoEntryWidth; i++) begin
-      logic [FifoEntryWidthSize-1:0] ptr = write_addr % 4 + i;
+      automatic logic [FifoEntryWidthSize-1:0] ptr = (write_addr % FifoEntryWidth) + i;
       block_n_din[ptr] = data_in >> ((write_width - 1 - i) * 8);
-      //block_n_din[i] = data_in >> (((((write_addr) + write_width) % 4) - 1 - i) * 8);
     end
-    //for (integer i = write_width - 1; i >= 0; i--) begin
-    //  logic [FifoEntryWidthSize-1:0] ptr = write_addr % 4 + i;
-    //  block_n_din[ptr] = data_in >> ((write_width - 1 - i) * 8);
-    //end
+
     data_out = block_n_dout[read_addr%FifoEntryWidth];
   end
 endmodule
